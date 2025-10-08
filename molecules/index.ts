@@ -8,3 +8,4 @@ export { default as KPICard } from "./KPICard";
 export { default as TransactionList } from "./TransactionList";
 export { default as BudgetsList } from "./BudgetsList";
 export { default as BillsGrid } from "./BillsGrid";
+export { default as LoginForm } from "./LoginForm";

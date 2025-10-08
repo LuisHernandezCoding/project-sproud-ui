@@ -35,3 +35,25 @@ Notes
 
 - For now tests, storybook, and CI are intentionally omitted — they can be added later.
 - The root repo `.gitignore` now ignores `web/src/ui/` to allow this folder to be managed by the new package's repo if you decide to split it out.
+
+Storybook
+
+- To run Storybook locally (dev):
+
+```bash
+cd web/src/ui
+pnpm install
+pnpm run storybook
+```
+
+- To build a static Storybook site for CI/deploy:
+
+```bash
+cd web/src/ui
+pnpm run build-storybook
+```
+
+Autodocs and automatic story generation
+
+- This project enables Storybook Autodocs (see `.storybook/preview.ts`).
+- It also wires the community `@takuma-ru/auto-story-generator` plugin inside `.storybook/main.ts` to generate simple stories from component files. Install dependencies before running Storybook.

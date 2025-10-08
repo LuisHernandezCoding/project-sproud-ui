@@ -4,3 +4,7 @@ package-lock.json
 pnpm-lock.yaml
 __snapshots__/
 *.local
+
+# Generated stories (created by scripts/generate-stories.mjs)
+# Uncomment the next line if you want generated stories to be ignored by git
+# /stories/generated/

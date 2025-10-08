@@ -9,8 +9,11 @@
   "files": ["dist"],
   "scripts": {
     "build": "tsup",
-    "clean": "rimraf dist node_modules/.cache",
-    "prepare": "pnpm run build"
+  "clean": "rimraf dist node_modules/.cache",
+  "prepare": "echo 'prepare skipped in dev; run pnpm run build before publish'",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "generate-stories": "node ./scripts/generate-stories.mjs"
   },
   "keywords": ["ui","components","react","typescript","projectSproud"],
   "author": "",
@@ -22,6 +25,17 @@
   "devDependencies": {
     "tsup": "^6.7.0",
     "typescript": "^5.0.0",
-    "rimraf": "^5.0.0"
+    "phosphor-react": "^1.4.1",
+    "rimraf": "^5.0.0",
+    "@storybook/react-vite": "^7.0.0",
+    "@storybook/addon-essentials": "^7.0.0",
+    "@storybook/addon-interactions": "^7.0.0",
+    "@takuma-ru/auto-story-generator": "^0.4.0",
+    "storybook": "^7.0.0"
+    ,"@storybook/react": "^7.6.20",
+    "@tailwindcss/postcss": "^4.1.14"
+    ,"tailwindcss": "^4.1.14",
+    "postcss": "^8.5.6",
+    "autoprefixer": "^10.4.21"
   }
 }

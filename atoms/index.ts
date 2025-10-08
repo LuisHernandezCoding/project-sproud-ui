@@ -23,3 +23,6 @@ export { default as Block } from "./Block";
 export { default as Sparkline } from "./Sparkline";
 export { default as Bars } from "./Bars";
 export { default as Separator } from "./Separator";
+export { default as PasswordInput } from "./PasswordInput";
+export { default as Alert } from "./Alert";
+export { default as SocialButton } from "./SocialButton";
