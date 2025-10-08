@@ -1,0 +1,37 @@
+# Source files
+atoms/
+molecules/
+organisms/
+onboarding/
+ResponsiveContent/
+icons/
+stories/
+scripts/
+.storybook/
+
+# Development files
+*.tsx
+*.ts
+!dist/**/*.d.ts
+tsconfig.json
+tsup.config.ts
+
+# Node modules and caches
+node_modules/
+.cache/
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Others
+README.md

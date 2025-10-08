@@ -1,37 +1,19 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../Logo";
 import Select from "../atoms/Select";
 import Avatar from "../atoms/Avatar";
 import NavItem from "../molecules/NavItem";
-import { useAuthFetch } from "../../features/auth/useAuthFetch";
 import { Link } from "react-router-dom";
 
-export default function Header() {
-  const fetcher = useAuthFetch();
+const Header: React.FC = () => {
   const [workspaceName, setWorkspaceName] = useState<string | null>(null);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    let mounted = true;
-    (async () => {
-      try {
-        const q = `query Me { me { id email avatarUrl preferences { activeWorkspace { id name } } } }`;
-        const resp = await fetcher(q);
-        const me = resp?.data?.me;
-        if (!mounted) return;
-        if (me) {
-          setAvatarUrl(me.avatarUrl || null);
-          const aw = me?.preferences?.activeWorkspace;
-          if (aw && aw.name) setWorkspaceName(aw.name);
-        }
-      } catch {
-        // ignore - header should be resilient if user info not available
-      }
-    })();
-    return () => {
-      mounted = false;
-    };
-  }, [fetcher]);
+    // This would be replaced with actual auth/data fetching in the consuming app
+    setWorkspaceName("Default Workspace");
+    setAvatarUrl("https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789");
+  }, []);
   return (
     <header id="header" className="bg-white border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
@@ -89,4 +71,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

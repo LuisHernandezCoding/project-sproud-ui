@@ -1,32 +1,34 @@
 import React from "react";
+import { clsx } from "clsx";
 
 type Props = {
   children?: React.ReactNode;
-  tone?: "default" | "success" | "danger" | "muted" | "light";
+  variant?: "default" | "success" | "danger" | "warning" | "muted";
   className?: string;
 };
 
 export default function Badge({
   children,
-  tone = "default",
+  variant = "default",
   className = "",
 }: Props) {
-  const toneClasses: Record<string, string> = {
-    default: "bg-gray-700 text-white",
-    success: "bg-green-600 text-white",
-    danger: "bg-red-600 text-white",
-    // muted should be low-contrast neutral, used in header filters
-    muted: "bg-neutral-100 text-gray-700 border border-neutral-200",
-    // light is a chip style used in the snapshot (rounded-full)
-    light: "bg-white text-gray-700 border border-neutral-200 rounded-full",
+  const variantClasses: Record<string, string> = {
+    default: "bg-gray-100 text-gray-800",
+    success: "bg-green-100 text-green-800",
+    danger: "bg-red-100 text-red-800",
+    warning: "bg-yellow-100 text-yellow-800",
+    muted: "bg-neutral-100 text-gray-600",
   };
-  const classes = [
-    "inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium",
-    toneClasses[tone],
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
 
-  return <span className={classes}>{children}</span>;
+  return (
+    <span 
+      className={clsx(
+        "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium",
+        variantClasses[variant],
+        className
+      )}
+    >
+      {children}
+    </span>
+  );
 }

@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from "react";
+import { clsx } from "clsx";
 
 type Props = {
   open: boolean;
   onClose: () => void;
   title?: React.ReactNode;
   children?: React.ReactNode;
+  showCloseButton?: boolean;
 };
 
 function getFocusableElements(container: HTMLElement) {
@@ -18,7 +20,13 @@ function getFocusableElements(container: HTMLElement) {
   );
 }
 
-export default function Modal({ open, onClose, title, children }: Props) {
+export default function Modal({ 
+  open, 
+  onClose, 
+  title, 
+  children, 
+  showCloseButton = true 
+}: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
 
@@ -87,17 +95,29 @@ export default function Modal({ open, onClose, title, children }: Props) {
         className="relative z-10 w-full max-w-lg rounded bg-white p-6"
       >
         {title ? (
-          <h3 className="text-lg font-medium text-gray-900">{title}</h3>
+          <div className="flex justify-between items-center pb-4 border-b border-gray-200">
+            <h3 className="text-lg font-medium text-gray-900">{title}</h3>
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600 focus:outline-none"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         ) : null}
-        <div className="mt-4">{children}</div>
-        <div className="mt-6 text-right">
-          <button
-            className="px-3 py-2 rounded bg-neutral-100 text-gray-900 border border-neutral-200"
-            onClick={onClose}
-          >
-            Close
-          </button>
-        </div>
+        <div className={clsx("mt-4", title && "pt-2")}>{children}</div>
+        {showCloseButton && (
+          <div className="mt-6 flex justify-end space-x-3">
+            <button
+              className="px-4 py-2 rounded-md bg-gray-100 text-gray-900 border border-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              onClick={onClose}
+            >
+              Close
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

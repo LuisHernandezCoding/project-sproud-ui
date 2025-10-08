@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "declaration": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": false,
+    "declarationDir": "dist/types",
     "outDir": "dist",
     "jsx": "react-jsx",
     "esModuleInterop": true,
@@ -15,6 +14,17 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules","dist","**/*.test.*"]
+  "include": [
+    "atoms/**/*",
+    "molecules/**/*",
+    "organisms/**/*",
+    "onboarding/**/*",
+    "ResponsiveContent/**/*",
+    "icons/**/*",
+    "index.ts",
+    "index.css",
+    "types.d.ts",
+    "Logo.tsx"
+  ],
+  "exclude": ["node_modules","dist","**/*.test.*","**/*.stories.*"]
 }

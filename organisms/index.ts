@@ -5,3 +5,6 @@ export { default as Header } from "./Header";
 export { default as Footer } from "./Footer";
 export { default as BudgetsOrganism } from "./BudgetsOrganism";
 export { default as LoginPage } from "./LoginPage";
+export { default as Navbar } from "./Navbar";
+export { default as SidebarNav } from "./SidebarNav";
+export { default as DashboardMain } from "./DashboardMain";

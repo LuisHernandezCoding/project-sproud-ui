@@ -1,38 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import FormField from "./FormField";
 
-type FormHook = ReturnType<
-  typeof import("../../features/auth/useEmailForm").default
->;
-
-type Props = {
-  formHook: FormHook;
+interface AuthEmailFormProps {
   mode?: "login" | "register";
   submitText?: string;
   className?: string;
-};
+  onSubmit?: (email: string) => void;
+}
 
-export default function AuthEmailForm({
-  formHook,
+const AuthEmailForm: React.FC<AuthEmailFormProps> = ({
   mode = "login",
   submitText,
   className = "",
-}: Props) {
-  const {
-    email,
-    setEmail,
-    loading,
-    message,
-    emailError,
-    setEmailError,
-    formRef,
-    isValidEmail,
-    submitEmail,
-  } = formHook;
+  onSubmit,
+}) => {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+
+  const isValidEmail = (email: string) => {
+    return /\S+@\S+\.\S+/.test(email);
+  };
+
+  const submitEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isValidEmail(email)) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
+    
+    setLoading(true);
+    try {
+      onSubmit?.(email);
+      setMessage("Check your email for a sign-in link");
+    } catch (error) {
+      setMessage("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <form
-      ref={formRef}
       onSubmit={submitEmail}
       aria-label={`email-form-${mode}`}
       className={className}
@@ -84,4 +94,6 @@ export default function AuthEmailForm({
       </button>
     </form>
   );
-}
+};
+
+export default AuthEmailForm;
